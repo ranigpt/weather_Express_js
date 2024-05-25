@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Express website</title>
+<link href="https://fonts.googleapis.com/css2?family=Mooli&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    body {
+        font-family: 'Mooli', sans-serif;
+    }
+    .carousel {
+        transition: transform 0.5s ease-in-out;
+    }
+</style>
+<link rel="shortcut icon" href="https://www.freeiconspng.com/thumbs/weather-icon-png/weather-icon-png-2.png" type="image/png"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="m-0 p-0 box-border">
+    <div class="container mx-auto flex flex-col min-h-screen max-w-full">
+        <nav class="border border-emerald-900 shadow-lg w-full h-auto bg-emerald-200 p-2">
+            <span><a class="flex justify-start items-center p-2 mt-3"><i class="fas fa-snowflake transition-all animate-spin 2s p-2"></i>SeeWeather<i class="fas fa-snowflake transition-all animate-spin 2s p-2"></i></a></span>
+            <ul class="flex flex-row justify-end items-center space-x-8 p-2 mb-4">
+                <li><a class="font-bold text-black hover:text-emerald-600" href="/">Home</a></li>
+                <li><a class="font-bold text-black hover:text-emerald-600" href="/weather">Weather</a></li>
+                <li><a class="font-bold text-black hover:text-emerald-600" href="/about">About</a></li>
+            </ul>
+        </nav>
+        <div class="main_div grid grid-cols-2 flex-grow">
+            <div class="first-side bg-white flex justify-center items-center p-4">
+                <div>
+                    <p>Welcome to weather app</p>
+                    <h1 class="text-2xl">Get The Latest Weather Info Of Your City</h1>
+                    <a href="/weather"><button class="px-4 py-2 border border-yellow-600 bg-emerald-500 shadow-md mt-3 text-white hover:bg-emerald-700">Check Now</button></a>
+                </div>
+            </div>
+            <div class="second-side bg-gray-100 flex justify-center items-center p-4">
+                <div class="overflow-hidden relative w-full">
+                    <div class="flex transition-transform duration-300 ease-in-out transform carousel" id="carousel">
+                        <div class="min-w-full flex justify-center items-center"><img src="https://cdn.vectorstock.com/i/500p/53/62/weather-infographic-line-climate-forecast-banner-vector-42465362.jpg" alt="firstImg" class="max-w-full h-auto"/></div>
+                        <div class="min-w-full flex justify-center items-center"><img src="./js/Image/cloud2.png" alt="secondImg" class="max-w-full h-auto"/></div>
+                        <div class="min-w-full flex justify-center items-center"><img src="https://cdni.iconscout.com/illustration/premium/thumb/weather-app-4488087-3738479.png" alt="thirdImg" class="max-w-full h-auto"/></div>
+                        <div class="min-w-full flex justify-center items-center"><img src="https://png.pngtree.com/element_our/20190523/ourmid/pngtree-weather-forecaster-png-element-image_1084942.jpg" alt="fourthImg" class="max-w-full h-auto"/></div>
+                    </div>
+                    <button id="prev" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2">Prev</button>
+                    <button id="next" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2">Next</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer h-12 bg-gray-200 w-full mt-auto flex justify-center items-center">
+            <p>developed_By_Rani_Gupta ❤</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.getElementById("carousel");
+            const prev = document.getElementById('prev');
+            const next = document.getElementById('next');
+            const slides = carousel.children;
+            const totalSlides = slides.length;
+
+            let index = 0; // Start with the first image
+            const intervalTime = 2000; // Time in milliseconds (4 seconds)
+
+            const updateCarousel = () => {
+                carousel.style.transform = `translateX(-${index * 100}%)`;
+            };
+
+            const nextSlide = () => {
+                index = (index < totalSlides - 1) ? index + 1 : 0;
+                updateCarousel();
+            };
+
+            prev.addEventListener('click', () => {
+                index = (index > 0) ? index - 1 : totalSlides - 1;
+                updateCarousel();
+            });
+
+            next.addEventListener('click', () => {
+                nextSlide();
+            });
+
+            // Automatically move to the next slide every 4 seconds
+            setInterval(nextSlide, intervalTime);
+
+            updateCarousel(); // Initialize carousel position
+        });
+    </script>
+</body>
+</html>

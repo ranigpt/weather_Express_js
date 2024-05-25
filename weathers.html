@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <title>Express website</title>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Mooli&display=swap" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            body {
+                font-family: 'Mooli', sans-serif;
+            }
+        </style>
+        
+        <link rel="shortcut icon" href="https://www.freeiconspng.com/thumbs/weather-icon-png/weather-icon-png-2.png" type="image/png"/>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+    
+        <body class="m-0 p-0 box-border">
+
+            <div class="container mx-auto flex flex-row min-h-screen max-w-full">
+        
+        
+                {{>navbaar}}
+
+
+
+
+                <div class="first-side bg-white flex  flex-col justify-center items-center p-4">
+                    <div>
+                        <form class="form">
+             <input type="text" id="cityname" placeholder="enter your city name" />
+
+             <input type="submit"  value="Search" id="submitBtn" class="p-2 m-2 bg-green-300 border border-yellow-500"/>
+
+                            </form>
+
+                            
+                    </div>
+                </div>
+                <div class="second-side bg-gray-100 flex flex-col justify-center items-center p-4">
+       
+                    <div>
+<div class="top_layer">
+         <span><p id="day">sat</p></span>
+        <span><p id="today_date">23-5</p></span>
+                            
+</div>
+
+<div class="main_layer">
+    <p id="city_name">Get Output here</p>
+    <div class="middle_layer_date_time">
+        <p id="temp"><span>0</span> <sup>0</sup>C</p>
+
+        <p id="temp_status" class=" rounded-sm">
+<i class="fa fa-cloud" id="temp_Mood"></i>
+
+        </p>
+
+    </div>
+
+</div>
+</div>
+                    
+                   
+                    
+                    
+                   
+              
+            </div>
+
+            </div>
+
+            <script>
+                const curDate = document.getElementById("today_date");
+        
+                <!-- let weatherid = document.getElementById("weatherid");
+         -->
+                const tempStatus = "Clouds";
+        
+                const getCurrentDay = ()=>{
+                    var weekday = new Array(7)
+        
+                    weekday[0] = "Sunday";
+                    weekday[1] = "Monday";
+                    weekday[2] = "Tuesday";
+                    weekday[3] = "Wednesday";
+                    weekday[4] = "Thursday";
+                    weekday[5] = "Friday";
+                    weekday[6] = "Saturday";
+                    
+        
+                    let CurrentTime = new Date();
+                    let day = weekday[CurrentTime.getDay()];
+                    console.log(weekday[CurrentTime.getDay()]);
+                   
+                    return day;
+        
+        
+                }
+        
+                const getCurrentTime = ()=>{
+        
+                    var months =[
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "June",
+                    "July",
+                    "Aug",
+                    "Sept",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                    ]
+                    var currentTime = new Date();
+                    var month = months[currentTime.getMonth()];
+                    var date = currentTime.getDate();
+                    var year = currentTime.getFullYear();
+        
+        
+                    let hours = currentTime.getHours();
+                    let mins = currentTime.getMinutes();
+        
+                    let perios = "AM";
+        
+                    if(hours>11){
+                        perios = "PM";
+                        if(hours>12) hours -=12;
+        
+                    }
+        if(mins <10){
+            mins = "0"+mins;
+        }
+           return `${month} ${date} |  ${hours}:${mins} ${perios}`;
+        
+                };
+        
+               curDate.innerHTML = getCurrentDay() + " | " + getCurrentTime();
+              
+            </script>
+            <script src="./public/js/main.js"></script>
+    </body>
+</html>
